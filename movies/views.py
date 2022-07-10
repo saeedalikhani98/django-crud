@@ -34,8 +34,7 @@ def create_new(request):
         return HttpResponseRedirect(reverse('movies_index') + '?edit_id=' + str(movie.id))
 
     context = {}
-    template = loader.get_template('movies/create.html')
-    return HttpResponse(template.render(context, request))
+    return render(request, "movies/create.html", context)
 
 
 def view(request, movie_id=None):
