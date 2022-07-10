@@ -1,0 +1,56 @@
+{% load static %}
+<html dir="rtl">
+    <head>
+        <title>خانه</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+        <script src="{% static 'movies/bootstrap-4.1.3/js/bootstrap.min.js' %}" ></script>
+    </head>
+    <div class="container">
+        <h1>دیتابیس فیلم</h1>
+
+        
+
+        {% if 'edit' in message %}
+            <div class="alert alert-success" role="alert">
+                فیلم #{{ message_id }} با موفقیت ثبت شد
+            </div>
+        {% endif %}
+
+        {% if 'delete' in message %}
+            <div class="alert alert-danger" role="alert">
+                فیلم #{{ message_id }} با موفقیت حذف شد
+            </div>
+        {% endif %}
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان</th>
+                    <th>ژانر</th>
+                    <th>مدت زمان</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <th>{{ movie.id }}</th>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.genre }}</td>
+                    <td>{{ movie.duration }} دقیقه</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'movies_view' movie.id %}">مشاهده</a>
+                        <a class="btn btn-warning" href="{% url 'movies_edit' movie.id %}">ویرایش</a>
+                        <a class="btn btn-danger" href="{% url 'movies_delete' movie.id %}">حذف</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <p><a class="btn btn-primary" href="{% url 'movies_create' %}">ساختن مورد جدید</a></p>
+    </div>
+</html>

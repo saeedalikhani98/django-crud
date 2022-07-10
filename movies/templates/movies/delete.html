@@ -1,0 +1,29 @@
+{% load static %}
+<html dir="rtl">
+    <head>
+        <title>حذف #{{movie.title}}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+        <script src="{% static 'movies/bootstrap-4.1.3/js/bootstrap.min.js' %}" ></script>
+    </head>
+    <div class="container">
+        <h1>حذف فیلم #{{movie.id}} </h1>
+
+        <form id="delete_form" method="POST" action="{% url 'movies_delete' movie.id %}">
+            {% csrf_token %}
+            
+            <p>آیا میخواهید فیلم  {{ movie.title }} را حذف کنید؟</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-secondary" href="{% url 'movies_index' %}"> بازگشت</a>
+                </div>
+                <div class="col-md-6" style="text-align: right;">
+                    <button type="submit" class="btn btn-danger">بله</button>
+                </div>
+            <div>
+            
+
+        </form>
+    </div>
+
+</html>
